@@ -1,0 +1,214 @@
+/* chrome apps don't seem to scroll by default. */
+html {
+  overflow-y: scroll;
+}
+
+.distributed-box {
+  display: flex;
+  justify-content: space-between;
+}
+
+.centered {
+  align-content: center;
+}
+
+.lonely-centered {
+  justify-content: space-around;
+  align-content: center;
+}
+
+.flex {
+  flex: auto;
+}
+
+#jog-panel table {
+  display: inline-table;
+	text-align: center;
+	vertical-align: middle;
+}
+
+#txt-command-log, #input-control-cmd {
+  font-family: monospace;
+}
+
+#console-log {
+	font-family: monospace;
+	font-size: smaller;
+  overflow-y: scroll;
+  height: 24em;
+  min-height: 12em;
+  -webkit-user-select: text;
+}
+
+.log-user-entry {
+  display: block;
+}
+.log-user-entry:before {
+  content: "> ";
+  color: #999;
+}
+
+.btn-estop {
+  border-radius: 30px;
+  border-width: 5px;
+  font-size: 24pt;
+  height: 70px;
+  margin: 20px;
+  width: 70px;
+}
+
+.alert {
+  -webkit-user-select: text;
+}
+
+.is-ack {
+  color: #006600;
+  float: right;
+  margin-top: -3ex;
+  padding-left: 1ex;
+}
+
+#render-canvas {
+  display: block;
+  margin: 0 auto;
+  height: 260px;
+  width: 418px;
+}
+
+@media (min-width: 750px) {
+  #render-canvas {
+    width: 688px;
+  }
+}
+@media (min-width: 970px) {
+  #render-canvas {
+    width: 908px;
+  }
+}
+@media (min-width: 1170px) {
+  #render-canvas {
+    width: 1108px;
+  }
+}
+
+.control-section {
+  margin-bottom: 2em;
+}
+
+
+
+#console-container {
+  padding: 1px;
+}
+
+#console-container .form-group,
+#console-container form {
+  margin: 0;
+}
+
+#bottom-tracker-logs {
+  bottom: 4em;
+  position: absolute;
+  height: 0;
+  width: 0;
+}
+
+#bottom-tracker-renderer {
+  bottom: 6em;
+  position: absolute;
+  height: 0;
+  width: 0;
+}
+
+.block {
+  display: flex;
+  flex-flow: row;
+}
+
+.stack {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
+}
+
+.bottom-margin {
+  margin-bottom: 20px;
+}
+
+.wide {
+  width: 100%;
+}
+
+
+
+
+
+	.number-input-container {
+		height: 50px;
+	}
+
+	.number-input {
+		width: calc(100% - 68px);
+		box-shadow: none;
+	}
+
+	.number-input-no-postfix {
+		border-top-right-radius: 0px;
+		border-bottom-right-radius: 0px;
+	}
+
+	.number-input-fix {
+		height: 34px;
+		line-height: 34px;
+		padding-right: 5px;
+		text-align: middle;
+	}
+
+	.number-input-postfix {
+		padding-left: 5px;
+	}
+
+	.number-input-btns-container {
+		width: 68px;
+		height: 34px;
+	}
+
+	.number-input-btns-container button {
+		width: 34px;
+		height: 34px;
+		box-shadow: none;
+		line-height: 5px;
+	}
+
+	.number-input-btns-container button:focus {
+		outline: 0;
+		background-color: white;
+		border-color: #ccc;
+	}
+
+	.number-input-plus {
+		background: white;
+		border-top-right-radius: 0px;
+		border-bottom-right-radius: 0px;
+		border-right: none;
+	}
+
+	.number-input-plus-no-postfix {
+		border-top-left-radius: 0px;
+		border-bottom-left-radius: 0px;
+		border-left: none;
+	}
+
+	.number-input-plus-postfix {
+
+	}
+
+	.number-input-minus {
+		
+		background: white;
+	}
+
+	.number-input-hint {
+		font-size: 0.8em;
+		color: #b3b3b3;
+	}

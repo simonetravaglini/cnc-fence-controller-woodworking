@@ -1,0 +1,247 @@
+<div class="container">
+  <span class="col-sm-4">
+   
+
+
+<!-- Incremental movement form-->
+<div class="control-section">
+      
+      <h4>Incremental movement</h4>  
+		
+		
+         <button type="button" 
+				class="btn btn-default  number-input-minus" 
+				ng-click="incrementmovement(-100)"
+				>
+			<strong>-100</strong>
+		</button>
+
+         <button type="button" 
+				class="btn btn-default  number-input-minus" 
+				ng-click="incrementmovement(-10)"
+				>
+			<strong>-10</strong>
+		</button>
+
+
+
+         <button type="button" 
+				class="btn btn-default  number-input-minus" 
+				ng-click="incrementmovement(-1)"
+				>
+			<strong>-1</strong>
+		</button>
+        
+
+
+    
+	<input type="text" value="{{movement}}"
+		   class="form-control number-input text-left"
+		   ></input>
+     
+	
+    
+	
+		<button type="button" 
+				class="btn btn-default  number-input-minus" 
+				ng-click="incrementmovement(1)">
+			<strong>+1</strong>
+		</button>
+
+        <button type="button" 
+				class="btn btn-default  number-input-minus" 
+				ng-click="incrementmovement(10)">
+			<strong>+10</strong>
+		</button>
+
+         <button type="button" 
+				class="btn btn-default  number-input-minus" 
+				ng-click="incrementmovement(100)">
+			<strong>+100</strong>
+		</button>
+
+
+</div>
+
+
+  <div class="control-section">
+         <!--<div class="stack">-->
+            <button class="btn btn-default number-input-minus"
+                ng-click="relativeMove2('X-'); setrealposition(-movement);abmovequalrealpos()">
+              <span class="glyphicon glyphicon-chevron-left"></span>
+              LEFT
+            </button>
+          <!--</div>-->
+          
+		  <!--<div class="stack"> -->
+            <button class="btn btn-default number-input-minus"
+                ng-click="relativeMove2('X'); setrealposition(movement);abmovequalrealpos()">
+              RIGHT
+              <span class="glyphicon glyphicon-chevron-right"></span>
+            </button>
+          <!--</div> -->
+        
+</div>
+
+
+
+
+
+
+
+<!--Absolute movement form-->
+<div class="control-section">
+      
+      <h4>Set absolute position ({{realposition}})</h4>  
+		
+		
+         <button type="button" 
+				class="btn btn-default  number-input-minus" 
+				ng-click="incrementmovementab(-100)"
+				>
+			<strong>-100</strong>
+		</button>
+
+         <button type="button" 
+				class="btn btn-default  number-input-minus" 
+				ng-click="incrementmovementab(-10)"
+				>
+			<strong>-10</strong>
+		</button>
+
+
+
+         <button type="button" 
+				class="btn btn-default  number-input-minus" 
+				ng-click="incrementmovementab(-1)"
+				>
+			<strong>-1</strong>
+		</button>
+        
+
+
+    
+	<input type="text" value="{{abmovement}}"
+		   class="form-control number-input text-left"
+		   ></input>
+     
+	
+    
+	
+		<button type="button" 
+				class="btn btn-default  number-input-minus" 
+				ng-click="incrementmovementab(1)">
+			<strong>+1</strong>
+		</button>
+
+        <button type="button" 
+				class="btn btn-default  number-input-minus" 
+				ng-click="incrementmovementab(10)">
+			<strong>+10</strong>
+		</button>
+
+         <button type="button" 
+				class="btn btn-default  number-input-minus" 
+				ng-click="incrementmovementab(100)">
+			<strong>+100</strong>
+		</button>
+
+
+</div>
+
+
+  <div class="control-section">
+<div class="stack">
+            <button class="btn btn-default number-input-minus"
+                ng-click="absoluteMove('X'); realposequalabmov()" >
+              <span class="glyphicon glyphicon-transfer"></span>
+              GO
+            </button>
+          </div>
+          
+		
+        
+</div>
+
+
+
+
+
+
+
+<!-- HOME and SET to 0 -->
+
+
+    <div class="control-section">
+      <div class="distributed-box" ng-show="settings.workspace_show_home">
+        <button class="btn btn-default flex number-input-minus"
+            ng-click="sendCommands(['G28 X0\n'])"
+            ng-disabled="!machineService.isConnected">Home Fence</button>
+     
+        <button class="btn btn-default flex number-input-minus"
+            ng-click="sendCommands(['G92 X0\n'])"
+            ng-disabled="!machineService.isConnected">Set postion to 0</button>
+			
+	  </div>
+    </div>
+	
+ <div class="control-section" ng-show="settings.workspace_show_estop">
+      <h4>Reset</h4>
+      <label for="emergency-stop" class="sr-only">emergency-stop</label>
+      <div class="distributed-box lonely-centered">
+        <button id="btn-emergency-stop" name="emergency-stop"
+            class="btn btn-danger btn-estop"
+            ng-click="emergencyStop()">
+          <span class="glyphicon glyphicon-refresh"></span>
+        </button>
+      </div>
+    </div>
+	
+	
+
+  </span>
+
+
+
+
+
+
+<!-- Console -->
+  <span class="col-sm-8">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="dropdown pull-right">
+          <button class="btn dropdown-toggle" type="button" id="console-menu" data-toggle="dropdown">
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="console-menu">
+            <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="machineService.logs = []">clear log</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="machineService.commandQueue = []">clear command queue</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="machineService.pendingAck = false">stop waiting for 'ok'</a></li>
+          </ul>
+        </div>
+        Console
+        <small id="lbl-enqueued-commands">
+          ({{machineService.commandQueue.length}} enqueued commands)
+        </small>
+        <span ng-show="machineService.pendingAck">~</span>
+      </div>
+      <div class="panel-body" id="console-container">
+        <div id="console-log" scroll-glue>
+          <div ng-repeat="l in logs track by $index"
+              ng-class="{'is-ack': l.isAck, 'log-user-entry': !l.remoteSource, 'log-remote-entry': l.remoteSource}">{{l.msg}}</div>
+        </div>
+        <form class="form" role="form" ng-submit="sendManualCommand(manualCommand)">
+          <div class="input-group">
+            <input type="text" class="form-control" id="input-control-cmd"
+                ng-model="manualCommand" ng-disabled="!machineService.isConnected">
+            <div class="input-group-btn">
+              <button type="submit" class="btn btn-default"
+                  ng-disabled="!machineService.isConnected">Send</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </span>
+</div>

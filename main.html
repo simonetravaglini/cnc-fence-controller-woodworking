@@ -1,0 +1,77 @@
+<html ng-app="gcodeSender" ng-csp>
+<head>
+  <meta charset="utf-8" />
+	<title>Fence controller</title>
+  <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="lib/bootstrap/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="lib/angular-csp.css">
+  <link rel="stylesheet" href="lib/hotkeys.min.css">
+  <link rel="stylesheet" href="main.css">
+  
+  
+  <script type="text/javascript" src="lib/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="lib/angular.min.js"></script>
+  <script type="text/javascript" src="lib/angular-ui-router.min.js"></script>
+  <script type="text/javascript" src="lib/moment.min.js"></script>
+  <script type="text/javascript" src="lib/paper-core.min.js"></script>
+  <script type="text/javascript" src="lib/scrollglue.js"></script>
+  <script type="text/javascript" src="lib/hotkeys.min.js"></script>
+  <script type="text/javascript" src="lib/number-input.min.js"></script>
+  <script src="gcode_util.js"></script>
+  <script src="main.js"></script>
+  <script src="fileservice.js"></script>
+  <script src="machineservice.js"></script>
+  <script src="warningservice.js"></script>
+  <script src="controlpanel.js"></script>
+  <script src="loadfile.js"></script>
+  <script src="settings.js"></script>
+  
+  
+</head>
+<body id="body" ng-controller="mainCtrl">
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Fence controller</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse">
+      <ul class="nav navbar-nav" id="main-tabs">
+        <li ng-class="{active:$state.is('controlpanel')}"><a ui-sref="controlpanel">Fence control panel</a></li>
+        <!-- <li ng-class="{active:$state.is('loadfile')}"><a ui-sref="loadfile">load file</a></li>-->
+        <li ng-class="{active:$state.is('settings')}"><a ui-sref="settings">Settings</a></li>
+        <li ng-class="{active:$state.is('about')}"><a ui-sref="about">About</a></li>
+      </ul>
+
+      <div class="navbar-form navbar-right">
+        <button class="btn btn-success"
+            ng-show="!machineService.isConnected"
+            ng-disabled="machineService.isBusy"
+            ng-click="connect()">connect</button>
+        <button class="btn btn-danger"
+            ng-show="machineService.isConnected"
+            ng-disabled="machineService.isBusy"
+            ng-click="disconnect()">disconnect</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" ng-show="warningService.warnings.length">
+    <div class="alert alert-warning alert-dismissable">
+      <button type="button" class="close" aria-hidden="true" ng-click="warningService.clear()">&times;</button>
+      <div ng-repeat="w in warningService.warnings track by $index">{{w}}</div>
+    </div>
+  </div>
+
+  <div class="tab-content" id="main-views" ui-view></div>
+
+  <div id="bottom-tracker-logs"></div>
+  <div id="bottom-tracker-renderer"></div>
+</body>
+</html>
